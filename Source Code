@@ -1,0 +1,24 @@
+import os
+import math
+import random
+import smtplib
+
+digits="0123456789"
+OTP=""
+for i in range(6):
+    OTP+=digits[math.floor(random.random()*10)]
+otp = OTP + " is your OTP for Azibo."
+msg= otp
+s = smtplib.SMTP('smtp.gmail.com', 587)
+s.starttls()
+s.login("Enter Your Email Id", "Email Key")  # To get Email key go to accounts setting and then go to privacy.
+emailid = input("Enter your email: ")
+s.sendmail('Amir Taque Ahmad',emailid,msg)
+
+while True:                         # It will create a loop and you must enter the right key otherwise it will not get verified.
+    a = input("Enter Your OTP >>: ")
+    if a == OTP:
+        print("OTP is Verified")
+        break
+    else:
+        print("Please Try Again")
